@@ -1,15 +1,56 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Layout from "../components/Layout";
+import MainLayout from "../lib/layout";
+import { StateProvider, useStateValue } from "../lib/state";
+import Header from "../components/Header";
+import withData from "../lib/apollo";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { GET_ALL_SLOTS } from "../graphql";
 
-const Index = props => {
+const NewComponent = () => {
+  const [{ theme }, dispatch] = useStateValue();
   return (
-    <Layout>
-      <p>Index.js</p>
-    </Layout>
+    <button
+      onClick={() =>
+        dispatch({
+          type: "changeTheme",
+          newTheme: { primary: "red" }
+        })
+      }
+    >
+      Ändra tema
+    </button>
   );
 };
 
-Index.propTypes = {};
+export default withData(props => {
+  const initialState = {
+    theme: { primary: "blue" }
+  };
 
-export default Index;
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "changeTheme":
+        return {
+          ...state,
+          theme: action.newTheme
+        };
+
+      default:
+        return state;
+    }
+  };
+
+  const {
+    data: slotNodes,
+    loading: slotDataIsLoading,
+    error: getAllSlotsHasError
+  } = useQuery(GET_ALL_SLOTS);
+
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <MainLayout>
+        <Header />
+        <NewComponent />
+      </MainLayout>
+    </StateProvider>
+  );
+});
