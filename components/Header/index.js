@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { LinkText } from "./styles";
-import { StateProvider, useStateValue } from "../../lib/state";
-import { Container, Row, Col } from "react-grid-system";
-import styled from "styled-components";
-import SvgLogo from "../../images/chLogo";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { LinkText } from './styles';
+import { StateProvider, useStateValue } from '../../lib/state';
+import { Container, Row, Col } from 'react-grid-system';
+import styled from 'styled-components';
+import SvgLogo from '../../images/chLogo';
 
-const Banner = styled.div`
+const Banner = styled.header`
   background-color: #003a5d;
   padding: 50px 0px;
 `;
@@ -29,31 +29,29 @@ const Header = () => {
   return (
     <Banner>
       <Container>
-        <Row justify="center">
-          {/* <Col xs={3}>
+        <nav>
+          <Row justify="center">
+            {/* <Col xs={3}>
             <LogoBg>
               <SvgLogo />
             </LogoBg>
           </Col> */}
-          <Col xs={3}>
-            <Link href="/">
-              <a>
-                <LinkText isActive={pathname === "/" && "is-active"}>
-                  Home
-                </LinkText>
-              </a>
-            </Link>
-          </Col>
-          <Col xs={3}>
-            <Link href="/about">
-              <a>
-                <LinkText isActive={pathname === "/about" && "is-active"}>
-                  About
-                </LinkText>
-              </a>
-            </Link>
-          </Col>
-        </Row>
+            <Col xs={3}>
+              <Link href="/">
+                <a>
+                  <LinkText isActive={pathname === '/' && 'is-active'}>Home</LinkText>
+                </a>
+              </Link>
+            </Col>
+            <Col xs={3}>
+              <Link href="/about">
+                <a>
+                  <LinkText isActive={pathname === '/about' && 'is-active'}>About</LinkText>
+                </a>
+              </Link>
+            </Col>
+          </Row>
+        </nav>
       </Container>
     </Banner>
   );

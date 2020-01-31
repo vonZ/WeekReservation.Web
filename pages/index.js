@@ -1,9 +1,11 @@
-import MainLayout from "../lib/layout";
-import { StateProvider, useStateValue } from "../lib/state";
-import Header from "../components/Header";
-import withData from "../lib/apollo";
-import { useQuery, useMutation } from "@apollo/react-hooks";
-import { GET_ALL_SLOTS } from "../graphql";
+import Layout from '../lib/layout';
+import { useStateValue } from '../lib/state';
+import Header from '../components/Header';
+import withData from '../lib/apollo';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_ALL_SLOTS } from '../graphql';
+
+import Button from '../components/Shared/Button';
 
 const NewComponent = () => {
   const [{ theme }, dispatch] = useStateValue();
@@ -11,8 +13,8 @@ const NewComponent = () => {
     <button
       onClick={() =>
         dispatch({
-          type: "changeTheme",
-          newTheme: { primary: "red" }
+          type: 'changeTheme',
+          newTheme: { primary: 'red' },
         })
       }
     >
@@ -22,35 +24,15 @@ const NewComponent = () => {
 };
 
 export default withData(props => {
-  const initialState = {
-    theme: { primary: "blue" }
-  };
+  const { data: slotNodes, loading: slotDataIsLoading, error: getAllSlotsHasError } = useQuery(GET_ALL_SLOTS);
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "changeTheme":
-        return {
-          ...state,
-          theme: action.newTheme
-        };
-
-      default:
-        return state;
-    }
-  };
-
-  const {
-    data: slotNodes,
-    loading: slotDataIsLoading,
-    error: getAllSlotsHasError
-  } = useQuery(GET_ALL_SLOTS);
+  console.log({ slotNodes });
 
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
-      <MainLayout>
-        <Header />
-        <NewComponent />
-      </MainLayout>
-    </StateProvider>
+    <Layout title="Sök vecka">
+      <Header />
+      <NewComponent />
+      <Button onClick={() => console.log('Klick')}>Testknapp</Button>
+    </Layout>
   );
 });
