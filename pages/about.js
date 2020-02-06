@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 export default props => {
   return (
-    <Layout>
+    <Layout title="Om oss">
       <Header />
 
       <article>

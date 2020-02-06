@@ -9,6 +9,7 @@ import SvgLogo from '../../images/chLogo';
 const Banner = styled.header`
   background-color: #003a5d;
   padding: 50px 0px;
+  text-align: center;
 `;
 
 const LogoBg = styled.div`
