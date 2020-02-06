@@ -11,7 +11,6 @@ export default class Layout extends Document {
         originalRenderPage({
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
-
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,

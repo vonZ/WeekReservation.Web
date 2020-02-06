@@ -1,7 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import Head from 'next/head';
-import { StateProvider, initialState } from '../lib/state';
-import reducer from '../reducers';
 
 type LayoutProps = {
   title?: string;
@@ -10,13 +8,32 @@ type LayoutProps = {
 const Layout: FunctionComponent<LayoutProps> = ({ children, title }) => (
   <>
     <Head>
-      <title>{title}</title>
+      <title>{title || ''}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <StateProvider initialState={initialState} reducer={reducer}>
-      {children}
-    </StateProvider>
+    {children}
+    <style jsx global>{`
+      * {
+        font-family: 'Arial';
+        margin: 0px;
+      }
+      input {
+        -webkit-appearance: none;
+        background-color: #fff;
+        border-radius: 6px;
+        border: 1px solid #d3dde6;
+        color: #0e3254;
+        display: block;
+        width: 100%;
+        font-family: inherit;
+        font-size: inherit;
+        height: 42px;
+        outline: none;
+        padding: 0 12px;
+        transition: border-color 0.2s;
+      }
+    `}</style>
   </>
 );
 export default Layout;
