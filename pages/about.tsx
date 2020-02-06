@@ -1,7 +1,7 @@
 import Layout from '../lib/layout';
 import Header from '../components/Header';
 
-export default props => {
+const About = () => {
   return (
     <Layout title="Om oss">
       <Header />
@@ -34,3 +34,5 @@ export default props => {
     </Layout>
   );
 };
+
+export default About;

@@ -24,7 +24,7 @@ const LogoBg = styled.div`
 const Header = () => {
   const router = useRouter();
   const [{ theme }, dispatch] = useStateValue();
-  console.log(theme);
+  // console.log(theme);
 
   const { pathname } = router;
   return (
