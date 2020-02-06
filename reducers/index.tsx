@@ -1,4 +1,8 @@
-const reducer = (state, action) => {
+type State = {
+  theme: string | null;
+};
+
+const reducer = (state: State, action: any) => {
   switch (action.type) {
     case 'changeTheme':
       return {
