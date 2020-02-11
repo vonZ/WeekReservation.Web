@@ -1,13 +1,11 @@
-import Layout from '../lib/layout';
-import { Container } from 'react-grid-system';
+import { useQuery } from '@apollo/react-hooks';
 import { useStateValue } from '../lib/state';
-import Header from '../components/Header';
-// import DateSearch from '../components/DateSearch/DateSearch';
 import withData from '../lib/apollo';
-// import { useQuery, useMutation } from '@apollo/react-hooks';
-// import { GET_ALL_SLOTS } from '../graphql';
+import { GET_ALL_SLOTS } from '../graphql';
 
+import Header from '../components/Header/Header';
 import Button from '../components/Shared/Button';
+import SlotsListingContainer from '../components/SlotsListing/SlotsListingContainer';
 
 const NewComponent = () => {
   const [{ theme }, dispatch] = useStateValue();
@@ -28,16 +26,18 @@ const NewComponent = () => {
 };
 
 export default withData(() => {
-  // const { data: slotNodes, loading: slotDataIsLoading, error: getAllSlotsHasError } = useQuery(GET_ALL_SLOTS);
+  const { data } = useQuery(GET_ALL_SLOTS);
+  const { getAllSlots = [] } = data ? data : {};
+
+  const slotsListingContainerProps = {
+    getAllSlots,
+  };
 
   return (
-    <Layout title="Sök vecka">
+    <>
       <Header />
-      <Container>
-        <NewComponent />
-        <Button onClick={() => console.log('Klick')}>Testknapp</Button>
-        {/* <DateSearch /> */}
-      </Container>
-    </Layout>
+      <NewComponent />
+      <SlotsListingContainer {...slotsListingContainerProps} />
+    </>
   );
 });

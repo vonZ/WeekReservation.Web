@@ -18,6 +18,9 @@ const Layout: FunctionComponent<LayoutProps> = ({ children, title }) => (
         font-family: 'Arial';
         margin: 0px;
       }
+      body {
+        background-color: #f8f5f5;
+      }
       input {
         -webkit-appearance: none;
         background-color: #fff;
@@ -27,7 +30,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ children, title }) => (
         display: block;
         width: 100%;
         font-family: inherit;
-        font-size: inherit;
+        font-size: 1rem;
         height: 42px;
         outline: none;
         padding: 0 12px;
