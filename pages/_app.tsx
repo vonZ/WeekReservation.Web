@@ -22,13 +22,16 @@ export const theme: ITheme = {
 
 const GlobalStyle = createGlobalStyle<IThemeWrapper>`
   * {
-    font-family: 'Arial';
+    font-family: 'Raleway';
     margin: 0px;
   }
   body {
     margin: 0 auto;
     background-color: #f8f5f5;
     color: ${props => props.theme.niceBlack}; 
+  }
+  h1, h2 {
+    color: #5A5A5A
   }
 `;
 
@@ -46,6 +49,10 @@ class MyApp extends App<IProps> {
         <Head>
           <title>Sök vecka</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <ApolloProvider client={apollo}>
           <ThemeProvider theme={theme}>

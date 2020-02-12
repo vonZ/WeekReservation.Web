@@ -8,12 +8,21 @@ interface IButtonProps {
 const StyledButton = styled.button`
   -webkit-appearance: none;
   border: none;
-  padding: 5px 7px;
+  padding: 10px;
   cursor: pointer;
   background: none;
-  color: #1060b6;
-  font-weight: bold;
+  font-weight: 700;
   font-size: inherit;
+  transition: 0.5s;
+
+  :focus {
+    outline: none;
+  }
+
+  :hover {
+    background: #eaeaea;
+    border-radius: 2px;
+  }
 `;
 
 const Button: FC<IButtonProps> = ({ children, onClick }) => <StyledButton onClick={onClick}>{children}</StyledButton>;

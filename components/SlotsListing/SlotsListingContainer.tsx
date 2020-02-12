@@ -1,29 +1,49 @@
-import { FunctionComponent as FC } from 'react';
-import { Container, Row } from 'react-grid-system';
-import Button from '../Shared/Button';
+import { FunctionComponent as FC, useState } from 'react';
+import MonthList from './MonthList';
+import SlotList from './SlotList';
 
 interface ISlotsListingContainerProps {
   getAllSlots: any;
+  defaultMonth: string;
 }
 
-const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ getAllSlots = [] }) => {
-  const getReservationsForSelection = (selection: string) => {
-    const selectedMonth = getAllSlots.filter((item: any) => item.month === selection);
-    console.log({ selectedMonth });
+interface ISlot {
+  alias: string;
+  month: string;
+  occupationStatusCode: number;
+  getSlotsForSelection(month?: string): void;
+  selectedMonth: string;
+}
+
+const getSlotsByMonth = (slotsArray: Array<ISlot>, month: string) =>
+  month !== '' ? slotsArray.filter((item: ISlot) => item.month === month) : slotsArray;
+const getUniqueMonths = (slotsArray: Array<ISlot>) => Array.from(new Set(slotsArray.map((item: ISlot) => item.month)));
+
+const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, getAllSlots = [] }) => {
+  const [slots, setSlots] = useState(getSlotsByMonth(getAllSlots, defaultMonth));
+
+  const getSlotsForSelection = (selection: string) => {
+    const selectedSlot = getSlotsByMonth(getAllSlots, selection);
+    setSlots(selectedSlot);
   };
 
-  const uniqueMonths = Array.from(new Set(getAllSlots.map((item: any) => item.month)));
+  const monthListProps = {
+    months: getUniqueMonths(getAllSlots),
+    getSlotsForSelection,
+    selectedMonth: slots.map((item: ISlot) => item.month)[0],
+  };
+
+  const slotListProps = {
+    slots,
+  };
 
   return (
-    <Container>
-      <Row justify="center">
-        {uniqueMonths.map((month: any, key: number) => (
-          <Button key={key} onClick={() => getReservationsForSelection(month)}>
-            {month}
-          </Button>
-        ))}
-      </Row>
-    </Container>
+    <>
+      <div style={{ padding: '50px 0px 0px' }}>
+        <MonthList {...monthListProps} />
+      </div>
+      <SlotList {...slotListProps} />
+    </>
   );
 };
 

@@ -1,9 +1,8 @@
-import Layout from '../lib/layout';
 import Header from '../components/Header/Header';
 
 const About = () => {
   return (
-    <Layout title="Om oss">
+    <>
       <Header />
 
       <article>
@@ -31,7 +30,7 @@ const About = () => {
           This example relies on <a href="http://graph.cool">graph.cool</a> for its GraphQL backend.
         </p>
       </article>
-    </Layout>
+    </>
   );
 };
 
