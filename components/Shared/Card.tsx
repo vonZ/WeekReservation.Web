@@ -6,8 +6,10 @@ interface ICardProps {
 }
 
 const StyledCard = styled.div`
-  min-height: 180px;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 160px;
   background: white;
   padding: 30px;
   border: 1px solid #00000012;

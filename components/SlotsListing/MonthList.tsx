@@ -15,9 +15,14 @@ interface IMonthProps {
 
 const Month = styled.span<IMonthProps>`
   padding: 3px 7px;
+  color: inherit;
   opacity: ${props => (props.currentmonth ? '1' : '0.6')};
-  border-bottom: ${props => (props.currentmonth ? '1px solid #1060b6' : 'none')};
-  color: #1060b6;
+  border-bottom: ${props => (props.currentmonth ? '1px solid white' : 'none')};
+
+  :hover {
+    opacity: 1;
+    border-bottom: 1px solid #0c244a;
+  }
 `;
 
 const MonthList: FC<IMonthListProps> = ({ months = [], getSlotsForSelection = () => {}, selectedMonth }) => (
@@ -28,7 +33,9 @@ const MonthList: FC<IMonthListProps> = ({ months = [], getSlotsForSelection = ()
           <Month currentmonth={selectedMonth === month}>{month}</Month>
         </Button>
       ))}
-      <Button onClick={() => getSlotsForSelection('')}>Visa alla</Button>
+      <Button extendedStyle={{ color: 'white', opacity: '0.6' }} onClick={() => getSlotsForSelection('')}>
+        Visa alla
+      </Button>
     </Row>
   </Container>
 );

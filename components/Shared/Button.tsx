@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 interface IButtonProps {
   onClick: any;
+  extendedStyle?: any;
 }
 
 const StyledButton = styled.button`
   -webkit-appearance: none;
   border: none;
   padding: 10px;
+  color: inherit;
   cursor: pointer;
   background: none;
   font-weight: 700;
@@ -22,9 +24,14 @@ const StyledButton = styled.button`
   :hover {
     background: #eaeaea;
     border-radius: 2px;
+    color: #0c244a;
   }
 `;
 
-const Button: FC<IButtonProps> = ({ children, onClick }) => <StyledButton onClick={onClick}>{children}</StyledButton>;
+const Button: FC<IButtonProps> = ({ children, extendedStyle, onClick }) => (
+  <StyledButton style={extendedStyle} onClick={onClick}>
+    {children}
+  </StyledButton>
+);
 
 export default Button;

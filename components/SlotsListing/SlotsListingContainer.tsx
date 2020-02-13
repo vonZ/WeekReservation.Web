@@ -13,6 +13,8 @@ interface ISlot {
   occupationStatusCode: number;
   getSlotsForSelection(month?: string): void;
   selectedMonth: string;
+  fromDate: string;
+  toDate: string;
 }
 
 const getSlotsByMonth = (slotsArray: Array<ISlot>, month: string) =>
@@ -39,7 +41,10 @@ const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, 
 
   return (
     <>
-      <div style={{ padding: '50px 0px 0px' }}>
+      <div style={{ padding: '50px 0px', background: '#0c244a', color: 'white' }}>
+        <h1 style={{ textAlign: 'center', paddingBottom: '50px', color: 'white', fontSize: '54px' }}>
+          Hitta en vecka att besöka oss
+        </h1>
         <MonthList {...monthListProps} />
       </div>
       <SlotList {...slotListProps} />
