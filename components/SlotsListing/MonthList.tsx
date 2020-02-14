@@ -17,7 +17,7 @@ const Month = styled.span<IMonthProps>`
   padding: 3px 7px;
   color: inherit;
   opacity: ${props => (props.currentmonth ? '1' : '0.6')};
-  border-bottom: ${props => (props.currentmonth ? '1px solid white' : 'none')};
+  border-bottom: ${props => (props.currentmonth ? '1px solid #464646' : 'none')};
 
   :hover {
     opacity: 1;
@@ -33,7 +33,7 @@ const MonthList: FC<IMonthListProps> = ({ months = [], getSlotsForSelection = ()
           <Month currentmonth={selectedMonth === month}>{month}</Month>
         </Button>
       ))}
-      <Button extendedStyle={{ color: 'white', opacity: '0.6' }} onClick={() => getSlotsForSelection('')}>
+      <Button extendedStyle={{ color: '#00345f', opacity: '0.6' }} onClick={() => getSlotsForSelection('')}>
         Visa alla
       </Button>
     </Row>

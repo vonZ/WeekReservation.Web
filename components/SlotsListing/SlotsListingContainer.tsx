@@ -41,10 +41,7 @@ const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, 
 
   return (
     <>
-      <div style={{ padding: '50px 0px', background: '#0c244a', color: 'white' }}>
-        <h1 style={{ textAlign: 'center', paddingBottom: '50px', color: 'white', fontSize: '54px' }}>
-          Hitta en vecka att besöka oss
-        </h1>
+      <div style={{ padding: '80px 0px 20px 0px', color: '#00345f' }}>
         <MonthList {...monthListProps} />
       </div>
       <SlotList {...slotListProps} />

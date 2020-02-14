@@ -10,14 +10,14 @@ interface ILinkTextProps {
 }
 
 const Banner = styled.header`
-  background-color: #0c244a;
+  background-color: white;
   padding: 50px 0px;
   text-align: center;
 `;
 
 const LinkText = styled.a<ILinkTextProps>`
   font-size: 14px;
-  color: white;
+  color: #464646;
   margin-right: 15px;
   cursor: pointer;
   text-decoration: ${props => (props.isactive ? 'underline' : 'none')};
