@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const GET_ALL_SLOTS = gql`
-  query getAllSlots {
+  query slotNodes {
     getAllSlots {
       id
       alias

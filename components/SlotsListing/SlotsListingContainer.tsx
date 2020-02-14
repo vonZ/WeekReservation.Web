@@ -1,9 +1,9 @@
-import { FunctionComponent as FC, useState } from 'react';
+import { FunctionComponent as FC, useState, useEffect } from 'react';
 import MonthList from './MonthList';
 import SlotList from './SlotList';
 
 interface ISlotsListingContainerProps {
-  getAllSlots: any;
+  slotNodes: Array<ISlot>;
   defaultMonth: string;
 }
 
@@ -18,21 +18,28 @@ interface ISlot {
 }
 
 const getSlotsByMonth = (slotsArray: Array<ISlot>, month: string) =>
-  month !== '' ? slotsArray.filter((item: ISlot) => item.month === month) : slotsArray;
+  month ? slotsArray.filter((item: ISlot) => item.month === month) : slotsArray;
 const getUniqueMonths = (slotsArray: Array<ISlot>) => Array.from(new Set(slotsArray.map((item: ISlot) => item.month)));
 
-const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, getAllSlots = [] }) => {
-  const [slots, setSlots] = useState(getSlotsByMonth(getAllSlots, defaultMonth));
+const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, slotNodes = [] }) => {
+  const [slots, setSlots] = useState(getSlotsByMonth(slotNodes, defaultMonth));
+  const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
+
+  useEffect(() => {
+    const showAllSlots = slots.length === slotNodes.length;
+    const month = !showAllSlots ? slots.map((item: ISlot) => item.month)[0] : '';
+    setSelectedMonth(month);
+  }, [slots]);
 
   const getSlotsForSelection = (selection: string) => {
-    const selectedSlot = getSlotsByMonth(getAllSlots, selection);
+    const selectedSlot = getSlotsByMonth(slotNodes, selection);
     setSlots(selectedSlot);
   };
 
   const monthListProps = {
-    months: getUniqueMonths(getAllSlots),
+    months: getUniqueMonths(slotNodes),
     getSlotsForSelection,
-    selectedMonth: slots.map((item: ISlot) => item.month)[0],
+    selectedMonth,
   };
 
   const slotListProps = {

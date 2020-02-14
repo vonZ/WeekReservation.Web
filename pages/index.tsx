@@ -27,11 +27,11 @@ import SlotsListingContainer from '../components/SlotsListing/SlotsListingContai
 
 const IndexPage = () => {
   const { data } = useQuery(GET_ALL_SLOTS);
-  const { getAllSlots = [] } = data ? data : {};
+  const { getAllSlots: slotNodes = [] } = data ? data : {};
 
   const slotsListingContainerProps = {
-    getAllSlots,
-    defaultMonth: 'Mars',
+    slotNodes,
+    defaultMonth: '',
   };
 
   return (
@@ -43,4 +43,7 @@ const IndexPage = () => {
   );
 };
 
-export default withApollo(IndexPage);
+export default withApollo(IndexPage, {
+  // Disable apollo ssr fetching in favour of automatic static optimization
+  ssr: true,
+});

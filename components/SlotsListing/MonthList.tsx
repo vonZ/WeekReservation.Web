@@ -9,11 +9,11 @@ interface IMonthListProps {
   selectedMonth: string;
 }
 
-interface IMonthProps {
+interface IMonthItemProps {
   readonly currentmonth?: boolean;
 }
 
-const Month = styled.span<IMonthProps>`
+const MonthItem = styled.span<IMonthItemProps>`
   padding: 3px 7px;
   color: inherit;
   opacity: ${props => (props.currentmonth ? '1' : '0.6')};
@@ -21,20 +21,19 @@ const Month = styled.span<IMonthProps>`
 
   :hover {
     opacity: 1;
-    border-bottom: 1px solid #0c244a;
   }
 `;
 
-const MonthList: FC<IMonthListProps> = ({ months = [], getSlotsForSelection = () => {}, selectedMonth }) => (
+const MonthList: FC<IMonthListProps> = ({ months = [], getSlotsForSelection = () => {}, selectedMonth = '' }) => (
   <Container>
     <Row justify="center">
       {months.map((month: string, key: number) => (
         <Button key={key} onClick={() => getSlotsForSelection(month)}>
-          <Month currentmonth={selectedMonth === month}>{month}</Month>
+          <MonthItem currentmonth={selectedMonth === month}>{month}</MonthItem>
         </Button>
       ))}
-      <Button extendedStyle={{ color: '#00345f', opacity: '0.6' }} onClick={() => getSlotsForSelection('')}>
-        Visa alla
+      <Button onClick={() => getSlotsForSelection('')}>
+        <MonthItem currentmonth={selectedMonth === ''}>Hela året</MonthItem>
       </Button>
     </Row>
   </Container>

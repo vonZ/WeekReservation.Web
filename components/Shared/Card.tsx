@@ -1,8 +1,8 @@
-import { FunctionComponent as FC } from 'react';
+import { FunctionComponent as FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface ICardProps {
-  children: any;
+  children: ReactNode;
 }
 
 const StyledCard = styled.div`

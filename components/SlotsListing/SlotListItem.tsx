@@ -124,7 +124,7 @@ const SlotListItem: FC<ISlotListItemProps> = ({
         )}
         <AlignRightWrapper>
           <Link href="/about">
-            <LinkText>Reservera vecka</LinkText>
+            <LinkText>{`Boka ${alias}`}</LinkText>
           </Link>
         </AlignRightWrapper>
       </Row>

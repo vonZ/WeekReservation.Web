@@ -1,9 +1,10 @@
-import { FunctionComponent as FC } from 'react';
+import { FunctionComponent as FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface IButtonProps {
-  onClick: any;
-  extendedStyle?: any;
+  onClick(): void;
+  extendedStyle?: object;
+  children: ReactNode;
 }
 
 const StyledButton = styled.button`
