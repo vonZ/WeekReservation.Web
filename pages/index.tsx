@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 // import { useStateValue } from '../lib/state';
-import withData from '../lib/apollo';
+import { withApollo } from '../lib/apollo';
 import { GET_ALL_SLOTS } from '../graphql';
 
 import Header from '../components/Header/Header';
@@ -25,7 +25,7 @@ import SlotsListingContainer from '../components/SlotsListing/SlotsListingContai
 //   );
 // };
 
-export default withData(() => {
+export default withApollo(() => {
   const { data } = useQuery(GET_ALL_SLOTS);
   const { getAllSlots = [] } = data ? data : {};
 
