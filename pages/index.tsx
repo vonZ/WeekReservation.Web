@@ -25,7 +25,7 @@ import SlotsListingContainer from '../components/SlotsListing/SlotsListingContai
 //   );
 // };
 
-export default withApollo(() => {
+const IndexPage = () => {
   const { data } = useQuery(GET_ALL_SLOTS);
   const { getAllSlots = [] } = data ? data : {};
 
@@ -41,4 +41,6 @@ export default withApollo(() => {
       <SlotsListingContainer {...slotsListingContainerProps} />
     </>
   );
-});
+};
+
+export default withApollo(IndexPage);
