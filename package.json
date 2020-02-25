@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "description": "Next + Apollo integration",
   "scripts": {
-    "dev": "next",
+    "start": "next",
     "build": "next build",
-    "start": "next start",
     "precommit": "lint-staged",
     "tslint": "tslint -p . -c tslint.json",
     "test": "jest"
@@ -68,7 +67,9 @@
     "react-dom": "^16.12.0",
     "react-grid-system": "^5.0.2",
     "react-nice-dates": "^1.0.2",
-    "styled-components": "^5.0.0"
+    "react-pose": "^4.0.10",
+    "styled-components": "^5.0.0",
+    "url-loader": "^3.0.0"
   },
   "husky": {
     "hooks": {
