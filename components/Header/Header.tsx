@@ -42,6 +42,11 @@ const Header: FC<IHeaderProps> = () => {
                 <LinkText isactive={pathname === '/about'}>About</LinkText>
               </Link>
             </Col>
+            <Col xs={3}>
+              <Link href="/search-week">
+                <LinkText isactive={pathname === '/search-week'}>Boka</LinkText>
+              </Link>
+            </Col>
           </Row>
         </nav>
       </Container>
