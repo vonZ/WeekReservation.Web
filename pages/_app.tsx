@@ -7,7 +7,7 @@ import { ApolloClient, NormalizedCacheObject } from 'apollo-boost';
 import withApollo from '../hooks/withApollo';
 import { StateProvider, initialState } from '../lib/state';
 import reducer from '../reducers';
-import 'react-nice-dates/build/style.css';
+import '../static/react-nice-dates.scss';
 
 export interface ITheme {
   niceBlack: string;

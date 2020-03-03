@@ -1,6 +1,7 @@
 import { FunctionComponent as FC, useState } from 'react';
 import styled from 'styled-components';
 import { Container, Row } from 'react-grid-system';
+import img from '../../media/images/landscape.jpg';
 import DateSearch from '../DateSearch/DateSearch';
 
 interface IBackgroundImageProps {
@@ -32,11 +33,9 @@ const SearchInputContainer = styled.div`
 const SearchContainer: FC = () => {
   const [hasSearched, setSearched] = useState(false);
 
-  const imageSrc = 'http://ch.test.viktorvonzeipel.com/wp-content/uploads/2017/02/20160702-DSC_0179-e1487700778324.jpg';
-
   return (
     <div style={{ position: 'relative' }}>
-      <BackgroundImage collapse={hasSearched} url={imageSrc} />
+      <BackgroundImage collapse={hasSearched} url={img} />
       <div style={{ position: 'absolute', top: '50%', marginTop: '-28px', width: '100%', textAlign: 'center' }}>
         <h1 style={{ fontSize: '3rem', color: 'white' }}>När vill du resa hit?</h1>
         <p style={{ fontSize: '1.4rem', color: 'white' }}>Sök efter ett datum</p>
