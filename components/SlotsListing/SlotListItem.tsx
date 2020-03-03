@@ -2,8 +2,9 @@ import { FunctionComponent as FC } from 'react';
 import Link from 'next/link';
 import { Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { Card } from '../Shared';
-import { Calendar as CalendarIcon, Bed as BedIcon, Check as CheckIcon } from '../../images/icons';
+import { Calendar as CalendarIcon, Bed as BedIcon, Check as CheckIcon } from '../../media/icons';
 
 interface ISlotItem {
   alias: string;
@@ -14,6 +15,7 @@ interface ISlotItem {
 
 interface ISlotListItemProps {
   slotItem: ISlotItem;
+  variants?: any;
   setOccupationStatusText: any;
   setOccupationColor: any;
 }
@@ -74,12 +76,15 @@ const AlignRightWrapper = styled.div`
   margin-left: auto;
 `;
 
+const getDateString = (datestring: string) => datestring.split('T')[0];
+
 const SlotListItem: FC<ISlotListItemProps> = ({
   slotItem: { alias = '', occupationStatusCode = 0, fromDate = '', toDate = '' } = {},
   setOccupationStatusText = () => {},
   setOccupationColor = () => {},
+  variants = {},
 }) => (
-  <div style={{ margin: '30px 0px' }}>
+  <motion.div variants={variants} style={{ margin: '30px 0px' }}>
     <Card>
       <div>
         <Row justify="start" align="center">
@@ -95,7 +100,7 @@ const SlotListItem: FC<ISlotListItemProps> = ({
         <Row style={{ paddingTop: 7 }} justify="start">
           <Col md={9}>
             <CalendarIcon />
-            <FactsText>{`${fromDate} - ${toDate}`}</FactsText>
+            <FactsText>{`${getDateString(fromDate)} - ${getDateString(toDate)}`}</FactsText>
           </Col>
         </Row>
         <Row style={{ paddingTop: 7 }} justify="start">
@@ -129,7 +134,7 @@ const SlotListItem: FC<ISlotListItemProps> = ({
         </AlignRightWrapper>
       </Row>
     </Card>
-  </div>
+  </motion.div>
 );
 
 export default SlotListItem;

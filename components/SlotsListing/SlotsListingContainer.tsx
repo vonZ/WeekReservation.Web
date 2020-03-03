@@ -21,7 +21,7 @@ const getSlotsByMonth = (slotsArray: Array<ISlot>, month: string) =>
   month ? slotsArray.filter((item: ISlot) => item.month === month) : slotsArray;
 const getUniqueMonths = (slotsArray: Array<ISlot>) => Array.from(new Set(slotsArray.map((item: ISlot) => item.month)));
 
-const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth, slotNodes = [] }) => {
+const SlotsListingContainer: FC<ISlotsListingContainerProps> = ({ defaultMonth = 'Augusti', slotNodes = [] }) => {
   const [slots, setSlots] = useState(getSlotsByMonth(slotNodes, defaultMonth));
   const [selectedMonth, setSelectedMonth] = useState(defaultMonth);
 

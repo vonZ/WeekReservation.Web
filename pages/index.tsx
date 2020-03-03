@@ -31,7 +31,7 @@ const IndexPage = () => {
 
   const slotsListingContainerProps = {
     slotNodes,
-    defaultMonth: '',
+    defaultMonth: 'September',
   };
 
   return (
