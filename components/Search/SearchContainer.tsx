@@ -1,6 +1,9 @@
 import { FunctionComponent as FC, useState } from 'react';
 import styled from 'styled-components';
 import { Container, Row } from 'react-grid-system';
+import LazyLoad from 'react-lazyload';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GET_SLOT_BY_DATESPAN } from '../../graphql';
 import img from '../../media/images/landscape.jpg';
 import DateSearch from '../DateSearch/DateSearch';
 
@@ -14,8 +17,9 @@ const BackgroundImage = styled.div<IBackgroundImageProps>`
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
+  opacity: 1;
   background-image: ${props => `url(${props.url})`};
-  transition: 0.2s;
+  transition: 0.2s ease-in-out;
 `;
 
 const SearchInputContainer = styled.div`
@@ -32,10 +36,21 @@ const SearchInputContainer = styled.div`
 
 const SearchContainer: FC = () => {
   const [hasSearched, setSearched] = useState(false);
+  const [searchSlot, { data }] = useLazyQuery(GET_SLOT_BY_DATESPAN);
+
+  if (data && data.getSlotByDateSpan) {
+    console.log({ data });
+  }
+
+  const dateSearchProps = {
+    searchSlot,
+  };
 
   return (
     <div style={{ position: 'relative' }}>
-      <BackgroundImage collapse={hasSearched} url={img} />
+      <LazyLoad offset={300} height={400} resize={true} once={true}>
+        <BackgroundImage collapse={hasSearched} url={img} />
+      </LazyLoad>
       <div style={{ position: 'absolute', top: '50%', marginTop: '-28px', width: '100%', textAlign: 'center' }}>
         <h1 style={{ fontSize: '3rem', color: 'white' }}>När vill du resa hit?</h1>
         <p style={{ fontSize: '1.4rem', color: 'white' }}>Sök efter ett datum</p>
@@ -43,7 +58,7 @@ const SearchContainer: FC = () => {
       <Container>
         <Row justify="center">
           <SearchInputContainer>
-            <DateSearch />
+            <DateSearch {...dateSearchProps} />
           </SearchInputContainer>
         </Row>
       </Container>

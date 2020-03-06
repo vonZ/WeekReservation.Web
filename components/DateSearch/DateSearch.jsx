@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { isSameDay } from 'date-fns';
 import { sv } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import { Container, Row, Col } from 'react-grid-system';
+import { useDispatch } from '../../context';
+import { Button } from '../Shared';
+import { User as UserIcon, Calendar as CalendarIcon } from '../../media/icons';
 
 const StyledInput = styled.input`
   border: none;
-  padding: 15px 30px;
+  padding: 15px 30px 15px 45px;
   font-size: 1rem;
   cursor: pointer;
 `;
@@ -16,7 +17,8 @@ const StyledInput = styled.input`
 const StyledSelect = styled.select`
   border: none;
   font-size: 1rem;
-  padding: 10px 30px;
+  height: 100%;
+  padding: 0px 20px 0px 45px;
   cursor: pointer;
   background: inherit;
   -webkit-appearance: none;
@@ -24,9 +26,39 @@ const StyledSelect = styled.select`
   appearance: none;
 `;
 
-const DateSearch = () => {
+const StyledUserIcon = styled(props => <UserIcon {...props} />)`
+  padding: 0px 10px;
+  position: absolute;
+  bottom: 23px;
+  width: 1.3rem;
+  height: 1.3rem;
+`;
+
+const StyledCalendarIcon = styled(props => <CalendarIcon {...props} />)`
+  padding: 13px 10px;
+  position: absolute;
+  width: 1.3rem;
+  height: 1.3rem;
+`;
+
+const DateSearch = ({ searchSlot }) => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+      const startDateISOTime = new Date(startDate - tzoffset).toISOString().slice(0, -1);
+      const endDateDateISOTime = new Date(endDate - tzoffset).toISOString().slice(0, -1);
+
+      dispatch({ type: 'setFromDate', fromDate: startDateISOTime });
+      dispatch({ type: 'setEndDate', endDate: endDateDateISOTime });
+
+      searchSlot({ variables: { fromDate: startDateISOTime, toDate: endDateDateISOTime } });
+    }
+  }, [startDate, endDate]);
 
   const dateRangePickerProps = {
     startDate,
@@ -39,23 +71,31 @@ const DateSearch = () => {
   };
 
   return (
-    <DateRangePicker {...dateRangePickerProps}>
-      {({ startDateInputProps, endDateInputProps }) => (
-        <div style={{ padding: '10px' }}>
-          <StyledInput {...startDateInputProps} placeholder="Från" />
-          <StyledInput {...endDateInputProps} placeholder="Till" />
-          <div style={{ display: 'inline-flex', borderLeft: '1px solid #c3c3c3' }}>
-            <StyledSelect>
-              <option>Antal besökare</option>
-              <option>1 besökare</option>
-              <option>2 besökare</option>
-              <option>3 besökare</option>
-              <option>4 besökare</option>
-            </StyledSelect>
+    <div style={{ display: 'inline-flex' }}>
+      <DateRangePicker {...dateRangePickerProps}>
+        {({ startDateInputProps, endDateInputProps }) => (
+          <div style={{ padding: '10px 0px 10px 10px' }}>
+            <StyledCalendarIcon />
+            <StyledInput {...startDateInputProps} placeholder="Från" />
+            <StyledCalendarIcon />
+            <StyledInput {...endDateInputProps} placeholder="Till" />
           </div>
-        </div>
-      )}
-    </DateRangePicker>
+        )}
+      </DateRangePicker>
+      <div style={{ borderLeft: '1px solid #c3c3c3', margin: '10px 0px', padding: '0px 20px' }}>
+        <StyledUserIcon />
+        <StyledSelect>
+          <option>Antal besökare</option>
+          <option>1 besökare</option>
+          <option>2 besökare</option>
+          <option>3 besökare</option>
+          <option>4 besökare</option>
+        </StyledSelect>
+      </div>
+      {/* <div style={{ display: 'inline-flex', padding: '0px 0px 0px 30px', borderLeft: '1px solid #c3c3c3' }}>
+              <Button extendedStyle={{ padding: '10px 30px', background: '#e6e6e6' }}>Sök</Button>
+            </div> */}
+    </div>
   );
 };
 

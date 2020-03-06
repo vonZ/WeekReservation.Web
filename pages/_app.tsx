@@ -5,8 +5,6 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient, NormalizedCacheObject } from 'apollo-boost';
 import withApollo from '../hooks/withApollo';
-import { StateProvider, initialState } from '../lib/state';
-import reducer from '../reducers';
 import '../static/react-nice-dates.scss';
 
 export interface ITheme {
@@ -29,7 +27,6 @@ const GlobalStyle = createGlobalStyle<IThemeWrapper>`
   body {
     margin: 0 auto;
     background-color: #f8f5f5;
-    color: ${props => props.theme.niceBlack}; 
   }
   h1, h2 {
     color: #5A5A5A
@@ -58,9 +55,7 @@ class MyApp extends App<IProps> {
         <ApolloProvider client={apollo}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <StateProvider initialState={initialState} reducer={reducer}>
-              <Component {...pageProps} />
-            </StateProvider>
+            <Component {...pageProps} />
           </ThemeProvider>
         </ApolloProvider>
       </React.Fragment>
