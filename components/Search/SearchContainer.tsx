@@ -1,26 +1,11 @@
-import { FunctionComponent as FC, useState } from 'react';
+import { FunctionComponent as FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Container, Row } from 'react-grid-system';
-import LazyLoad from 'react-lazyload';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_SLOT_BY_DATESPAN } from '../../graphql';
-import img from '../../media/images/landscape.jpg';
-import DateSearch from '../DateSearch/DateSearch';
-
-interface IBackgroundImageProps {
-  readonly collapse?: boolean;
-  readonly url: string;
-}
-
-const BackgroundImage = styled.div<IBackgroundImageProps>`
-  height: ${props => (props.collapse ? '250px' : '400px')};
-  background-position: top;
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 1;
-  background-image: ${props => `url(${props.url})`};
-  transition: 0.2s ease-in-out;
-`;
+import Hero from '../Hero';
+import DateSearch from './DateSearch/DateSearch';
+import ResultList from './SearchResult/ResultList';
 
 const SearchInputContainer = styled.div`
   position: absolute;
@@ -34,36 +19,43 @@ const SearchInputContainer = styled.div`
   box-shadow: 0px 2px 6px 1px #00000005;
 `;
 
+const SearchResultContainer = styled.div`
+  padding: 50px 0px;
+`;
+
 const SearchContainer: FC = () => {
   const [hasSearched, setSearched] = useState(false);
-  const [searchSlot, { data }] = useLazyQuery(GET_SLOT_BY_DATESPAN);
+  const [searchSlot, { data: slotData }] = useLazyQuery(GET_SLOT_BY_DATESPAN);
 
-  if (data && data.getSlotByDateSpan) {
-    console.log({ data });
-  }
+  useEffect(() => {
+    if (slotData && slotData.getSlotByDateSpan) {
+      console.log(slotData.getSlotByDateSpan);
+      setSearched(true);
+    }
+  }, [slotData]);
 
-  const dateSearchProps = {
-    searchSlot,
+  const resultListProps = {
+    searchResult: slotData?.getSlotByDateSpan || [],
   };
 
   return (
-    <div style={{ position: 'relative' }}>
-      <LazyLoad offset={300} height={400} resize={true} once={true}>
-        <BackgroundImage collapse={hasSearched} url={img} />
-      </LazyLoad>
-      <div style={{ position: 'absolute', top: '50%', marginTop: '-28px', width: '100%', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '3rem', color: 'white' }}>När vill du resa hit?</h1>
-        <p style={{ fontSize: '1.4rem', color: 'white' }}>Sök efter ett datum</p>
-      </div>
+    <>
+      <Hero hasSearched={hasSearched} />
       <Container>
         <Row justify="center">
           <SearchInputContainer>
-            <DateSearch {...dateSearchProps} />
+            <DateSearch searchSlot={searchSlot} />
           </SearchInputContainer>
         </Row>
       </Container>
-      <button onClick={() => setSearched(!hasSearched)}>Reservera vecka</button>
-    </div>
+      <SearchResultContainer>
+        <Container>
+          <Row justify="center">
+            <ResultList {...resultListProps} />
+          </Row>
+        </Container>
+      </SearchResultContainer>
+    </>
   );
 };
 

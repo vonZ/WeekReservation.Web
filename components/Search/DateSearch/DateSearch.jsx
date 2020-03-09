@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { sv } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import { Container, Row, Col } from 'react-grid-system';
-import { useDispatch } from '../../context';
-import { Button } from '../Shared';
-import { User as UserIcon, Calendar as CalendarIcon } from '../../media/icons';
+import { useDispatch } from '../../../context';
+import { Button } from '../../Shared';
+import { User as UserIcon, Calendar as CalendarIcon } from '../../../media/icons';
 
 const StyledInput = styled.input`
   border: none;

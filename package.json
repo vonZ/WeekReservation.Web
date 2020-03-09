@@ -18,6 +18,7 @@
   "author": "Adam Soffer",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/react": "^9.1.4",
