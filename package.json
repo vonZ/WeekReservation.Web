@@ -1,8 +1,8 @@
 {
-  "name": "next-apollo-example",
+  "name": "week-reservation-web",
   "url": "git@github.com:ads1018/next-apollo-example.git",
-  "version": "0.0.0",
-  "description": "Next + Apollo integration",
+  "version": "1.0.0",
+  "description": "Week reservation web",
   "scripts": {
     "start": "next",
     "build": "next build",
@@ -15,10 +15,10 @@
     "trailingComma": "es5",
     "printWidth": 120
   },
-  "author": "Adam Soffer",
+  "author": "Viktor von Zeipel",
   "license": "ISC",
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/react": "^9.1.4",
@@ -53,9 +53,11 @@
     "@types/next": "^9.0.0",
     "@types/react-lazyload": "^2.6.0",
     "@types/react-transition-group": "^4.2.4",
+    "@types/smoothscroll-polyfill": "^0.3.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "apollo-boost": "^0.4.7",
+    "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
     "date-fns": "^2.9.0",
     "file-loader": "^5.1.0",
     "framer-motion": "^1.8.4",
@@ -81,8 +83,10 @@
     "react-lazyload": "^2.6.5",
     "react-nice-dates": "^1.0.2",
     "react-pose": "^4.0.10",
+    "react-scripts": "^3.3.0",
     "react-transition-group": "^4.3.0",
     "resize-observer-polyfill": "^1.5.1",
+    "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^5.0.0",
     "url-loader": "^3.0.0"
   },

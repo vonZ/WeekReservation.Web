@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle<IThemeWrapper>`
   }
   body {
     margin: 0 auto;
+    min-height: 1500px;
     background-color: #f8f5f5;
   }
   h1, h2 {

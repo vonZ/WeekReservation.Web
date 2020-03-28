@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Container, Row } from 'react-grid-system';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_SLOT_BY_DATESPAN } from '../../graphql';
+import { PaddingWrapper } from '../Shared';
 import Hero from '../Hero';
 import DateSearch from './DateSearch/DateSearch';
 import ResultList from './SearchResult/ResultList';
@@ -35,7 +36,8 @@ const SearchContainer: FC = () => {
   }, [slotData]);
 
   const resultListProps = {
-    searchResult: slotData?.getSlotByDateSpan || [],
+    // searchResult: slotData?.getSlotByDateSpan || [],
+    searchResult: slotData ? slotData.getSlotByDateSpan : [],
   };
 
   return (
@@ -51,7 +53,9 @@ const SearchContainer: FC = () => {
       <SearchResultContainer>
         <Container>
           <Row justify="center">
-            <ResultList {...resultListProps} />
+            <PaddingWrapper>
+              <ResultList {...resultListProps} />
+            </PaddingWrapper>
           </Row>
         </Container>
       </SearchResultContainer>

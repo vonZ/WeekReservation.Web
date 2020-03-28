@@ -1,3 +1,4 @@
 module.exports = {
-  presets: ["next/babel"]
+  presets: ['next/babel', '@babel/typescript'],
+  plugins: ['transform-optional-chaining'],
 };

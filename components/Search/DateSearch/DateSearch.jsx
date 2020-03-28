@@ -4,6 +4,7 @@ import { sv } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import { Container, Row, Col } from 'react-grid-system';
 import { useDispatch } from '../../../context';
+import { UI } from '../../../utils';
 import { Button } from '../../Shared';
 import { User as UserIcon, Calendar as CalendarIcon } from '../../../media/icons';
 
@@ -70,32 +71,33 @@ const DateSearch = ({ searchSlot }) => {
     locale: sv,
   };
 
+  const inputOnClick = () => UI.scrollElementIntoView(document.getElementById('DateSearch'));
+
   return (
-    <div style={{ display: 'inline-flex' }}>
-      <DateRangePicker {...dateRangePickerProps}>
-        {({ startDateInputProps, endDateInputProps }) => (
-          <div style={{ padding: '10px 0px 10px 10px' }}>
-            <StyledCalendarIcon />
-            <StyledInput {...startDateInputProps} placeholder="Från" />
-            <StyledCalendarIcon />
-            <StyledInput {...endDateInputProps} placeholder="Till" />
-          </div>
-        )}
-      </DateRangePicker>
-      <div style={{ borderLeft: '1px solid #c3c3c3', margin: '10px 0px', padding: '0px 20px' }}>
-        <StyledUserIcon />
-        <StyledSelect>
-          <option>Antal besökare</option>
-          <option>1 besökare</option>
-          <option>2 besökare</option>
-          <option>3 besökare</option>
-          <option>4 besökare</option>
-        </StyledSelect>
+    <>
+      <div id="DateSearch" style={{ display: 'inline-flex', paddingTop: '100px', marginTop: '-100px' }}>
+        <DateRangePicker {...dateRangePickerProps}>
+          {({ startDateInputProps, endDateInputProps }) => (
+            <div style={{ padding: '10px 0px 10px 10px' }}>
+              <StyledCalendarIcon />
+              <StyledInput {...startDateInputProps} onClick={inputOnClick} placeholder="Från" />
+              <StyledCalendarIcon />
+              <StyledInput {...endDateInputProps} onClick={inputOnClick} placeholder="Till" />
+            </div>
+          )}
+        </DateRangePicker>
+        <div style={{ borderLeft: '1px solid #c3c3c3', margin: '10px 0px', padding: '0px 20px' }}>
+          <StyledUserIcon />
+          <StyledSelect>
+            <option>Antal besökare</option>
+            <option>1 besökare</option>
+            <option>2 besökare</option>
+            <option>3 besökare</option>
+            <option>4 besökare</option>
+          </StyledSelect>
+        </div>
       </div>
-      {/* <div style={{ display: 'inline-flex', padding: '0px 0px 0px 30px', borderLeft: '1px solid #c3c3c3' }}>
-              <Button extendedStyle={{ padding: '10px 30px', background: '#e6e6e6' }}>Sök</Button>
-            </div> */}
-    </div>
+    </>
   );
 };
 
