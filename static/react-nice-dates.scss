@@ -137,6 +137,7 @@ $nice-dates-cell-width: calc(100% / 7);
     &_date {
       transition: 150ms color;
       will-change: color;
+      color: inherit;
       z-index: 3;
     }
 
