@@ -1,10 +1,12 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient, NormalizedCacheObject } from 'apollo-boost';
 import withApollo from '../hooks/withApollo';
+import { GlobalStyle } from '../static/globalStyle';
+import '../static/global.scss';
 import '../static/react-nice-dates.scss';
 
 export interface ITheme {
@@ -18,21 +20,6 @@ export interface IThemeWrapper {
 export const theme: ITheme = {
   niceBlack: '#001F3F',
 };
-
-const GlobalStyle = createGlobalStyle<IThemeWrapper>`
-  * {
-    font-family: 'Raleway';
-    margin: 0px;
-  }
-  body {
-    margin: 0 auto;
-    min-height: 1500px;
-    background-color: #f8f5f5;
-  }
-  h1, h2 {
-    color: #5A5A5A
-  }
-`;
 
 // since "apollo" isn't a native Next.js prop we have to declare it's type.
 interface IProps {
