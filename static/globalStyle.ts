@@ -17,10 +17,14 @@ export const GlobalStyle = createGlobalStyle`
   h2 {
     font-size: 2rem;
   }
-  p, a, span, input, select, td, tr, th {
+  p, a, span, input, button, select, td, tr, th {
     font-size: 1.4rem;
   }
   h1, h2, p, span {
     color: #5A5A5A;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
   }
 `;
