@@ -8,6 +8,7 @@ export const GET_SLOT_BY_DATESPAN = gql`
       fromDate
       toDate
       capacity
+      price
     }
   }
 `;

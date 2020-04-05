@@ -9,6 +9,7 @@ export const GET_ALL_SLOTS = gql`
       toDate
       month
       occupationStatusCode
+      price
     }
   }
 `;
