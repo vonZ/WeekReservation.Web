@@ -14,8 +14,8 @@ const Hero: FC<IHeroProps> = ({ hasSearched = false }) => (
   <div style={{ position: 'relative' }}>
     <BackgroundImage bgImageUrl={landscapeImageBase} collapse={hasSearched} />
     <div style={{ position: 'absolute', top: '50%', marginTop: '-28px', width: '100%', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '3rem', color: 'white' }}>När vill du resa hit?</h1>
-      <p style={{ fontSize: '1.4rem', color: 'white' }}>Sök efter ett datum</p>
+      <h1 style={{ fontSize: '5rem', color: 'white' }}>När vill du resa hit?</h1>
+      <p style={{ fontSize: '2rem', color: 'white' }}>Sök efter ett datum</p>
     </div>
   </div>
 );
