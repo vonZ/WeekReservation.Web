@@ -10,16 +10,15 @@ import { User as UserIcon, Calendar as CalendarIcon } from '../../../media/icons
 
 const StyledInput = styled.input`
   border: none;
-  padding: 15px 30px 15px 45px;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  padding: 14px 30px 14px 37px;
   cursor: pointer;
 `;
 
 const StyledSelect = styled.select`
   border: none;
-  font-size: 1rem;
   height: 100%;
-  padding: 0px 20px 0px 45px;
+  padding: 0px 20px 0px 25px;
   cursor: pointer;
   background: inherit;
   -webkit-appearance: none;
@@ -28,18 +27,13 @@ const StyledSelect = styled.select`
 `;
 
 const StyledUserIcon = styled(props => <UserIcon {...props} />)`
-  padding: 0px 10px;
   position: absolute;
-  bottom: 23px;
-  width: 1.3rem;
-  height: 1.3rem;
+  bottom: 25px;
 `;
 
 const StyledCalendarIcon = styled(props => <CalendarIcon {...props} />)`
-  padding: 13px 10px;
+  padding: 14px 10px;
   position: absolute;
-  width: 1.3rem;
-  height: 1.3rem;
 `;
 
 const DateSearch = ({ searchSlot }) => {
