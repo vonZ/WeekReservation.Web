@@ -9,5 +9,10 @@
         "preprocess": false
       }
     ]
-  ]
+  ],
+  "env": {
+    "development": {
+      "compact": false
+    }
+  }
 }
