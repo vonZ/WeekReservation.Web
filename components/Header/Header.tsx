@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Container, Row, Col } from 'react-grid-system';
 
-interface IHeaderProps {}
 interface ILinkTextProps {
   readonly isactive?: boolean;
 }
@@ -23,7 +22,7 @@ const LinkText = styled.a<ILinkTextProps>`
   text-decoration: ${props => (props.isactive ? 'underline' : 'none')};
 `;
 
-const Header: FC<IHeaderProps> = () => {
+const Header: FC = () => {
   const router = useRouter();
   const { pathname } = router;
 

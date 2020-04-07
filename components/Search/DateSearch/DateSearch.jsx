@@ -1,40 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { sv } from 'date-fns/locale';
 import { DateRangePicker } from 'react-nice-dates';
 import { Container, Row, Col } from 'react-grid-system';
 import { useDispatch } from '../../../context';
-import { UI } from '../../../utils';
+import { UI, variables } from '../../../utils';
 import { Button } from '../../Shared';
-import { User as UserIcon, Calendar as CalendarIcon } from '../../../media/icons';
-
-const StyledInput = styled.input`
-  border: none;
-  font-size: 1.5rem;
-  padding: 14px 30px 14px 37px;
-  cursor: pointer;
-`;
-
-const StyledSelect = styled.select`
-  border: none;
-  height: 100%;
-  padding: 0px 20px 0px 25px;
-  cursor: pointer;
-  background: inherit;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-`;
-
-const StyledUserIcon = styled(props => <UserIcon {...props} />)`
-  position: absolute;
-  bottom: 25px;
-`;
-
-const StyledCalendarIcon = styled(props => <CalendarIcon {...props} />)`
-  padding: 14px 10px;
-  position: absolute;
-`;
+import * as $ from './style';
 
 const DateSearch = ({ searchSlot }) => {
   const [startDate, setStartDate] = useState();
@@ -68,30 +39,28 @@ const DateSearch = ({ searchSlot }) => {
   const inputOnClick = () => UI.scrollElementIntoView(document.getElementById('DateSearch'));
 
   return (
-    <>
-      <div id="DateSearch" style={{ display: 'inline-flex', paddingTop: '100px', marginTop: '-100px' }}>
-        <DateRangePicker {...dateRangePickerProps}>
-          {({ startDateInputProps, endDateInputProps }) => (
-            <div style={{ padding: '10px 0px 10px 10px' }}>
-              <StyledCalendarIcon />
-              <StyledInput {...startDateInputProps} onClick={inputOnClick} placeholder="Från" />
-              <StyledCalendarIcon />
-              <StyledInput {...endDateInputProps} onClick={inputOnClick} placeholder="Till" />
-            </div>
-          )}
-        </DateRangePicker>
-        <div style={{ borderLeft: '1px solid #c3c3c3', margin: '10px 0px', padding: '0px 20px' }}>
-          <StyledUserIcon />
-          <StyledSelect>
-            <option>Antal besökare</option>
-            <option>1 besökare</option>
-            <option>2 besökare</option>
-            <option>3 besökare</option>
-            <option>4 besökare</option>
-          </StyledSelect>
-        </div>
+    <$.DateSearchWrapper id="DateSearch">
+      <DateRangePicker {...dateRangePickerProps}>
+        {({ startDateInputProps, endDateInputProps }) => (
+          <div style={{ padding: '10px 0px 10px 10px' }}>
+            <$.StyledCalendarIcon />
+            <$.StyledInput {...startDateInputProps} onClick={inputOnClick} placeholder="Från" />
+            <$.StyledCalendarIcon />
+            <$.StyledInput {...endDateInputProps} onClick={inputOnClick} placeholder="Till" />
+          </div>
+        )}
+      </DateRangePicker>
+      <div style={{ borderLeft: '1px solid #c3c3c3', margin: '10px 0px', padding: '0px 20px' }}>
+        <$.StyledUserIcon />
+        <$.StyledSelect>
+          <option>Antal besökare</option>
+          <option>1 besökare</option>
+          <option>2 besökare</option>
+          <option>3 besökare</option>
+          <option>4 besökare</option>
+        </$.StyledSelect>
       </div>
-    </>
+    </$.DateSearchWrapper>
   );
 };
 
