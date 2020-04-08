@@ -77,3 +77,8 @@ export const StyledRoomImage = styled.img<IStyledRoomImageProps>`
   opacity: ${props => (props.imageloaded ? '1' : '0')};
   transition: opacity 0.6s;
 `;
+
+export const ShowMoreResultsWrapper = styled.div`
+  text-align: center;
+  margin: 30px 0px;
+`;

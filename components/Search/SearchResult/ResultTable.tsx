@@ -4,6 +4,7 @@ import { Card } from '../../Shared';
 import { TransitionTbodyWrapper, TransitionTrWrapper } from './common';
 import * as $ from './style';
 import ResultTableItem from './ResultTableItem';
+import ShowMoreResults from './ShowMoreResults';
 
 interface IResultTableProps {
   searchResults?: any;
@@ -13,7 +14,6 @@ interface IResultTableProps {
 const ResultTable: FC<IResultTableProps> = ({ searchResults = [], nrOfItemsPerPage = 3 }) => {
   const [nodes, setNodes] = useState(searchResults.slice(0, nrOfItemsPerPage));
   const [resultIndex, setResultIndex] = useState(nrOfItemsPerPage);
-  const [selectedSlot, setSelectedSlot] = useState({});
 
   const dispatch = useDispatch();
 
@@ -21,10 +21,10 @@ const ResultTable: FC<IResultTableProps> = ({ searchResults = [], nrOfItemsPerPa
     setNodes(searchResults.slice(0, resultIndex));
   }, [resultIndex]);
 
-  // TODO: dispatch func on setSelectedSlot prop. No need for local state
-  useEffect(() => {
-    dispatch({ type: 'setSelectedSlot', selectedSlot });
-  }, [selectedSlot]);
+  const showMoreResultsProps = {
+    shouldRender: nodes.length < searchResults.length,
+    onClick: () => setResultIndex(resultIndex + nrOfItemsPerPage),
+  };
 
   return (
     <>
@@ -39,21 +39,18 @@ const ResultTable: FC<IResultTableProps> = ({ searchResults = [], nrOfItemsPerPa
             </tr>
           </thead>
           <TransitionTbodyWrapper>
-            {nodes.map((item: any, key: any) => (
+            {nodes.map((item: any, key: string) => (
               <TransitionTrWrapper key={key}>
-                <ResultTableItem item={item} setSelectedSlot={setSelectedSlot} />
+                <ResultTableItem
+                  item={item}
+                  setSelectedSlot={(selectedSlot: any) => dispatch({ type: 'setSelectedSlot', selectedSlot })}
+                />
               </TransitionTrWrapper>
             ))}
           </TransitionTbodyWrapper>
         </table>
       </Card>
-      {nodes.length < searchResults.length && (
-        <div style={{ textAlign: 'center', margin: '30px 0px' }}>
-          <$.StyledButton onClick={() => setResultIndex(resultIndex + nrOfItemsPerPage)}>
-            Visa fler resultat
-          </$.StyledButton>
-        </div>
-      )}
+      <ShowMoreResults {...showMoreResultsProps} />
     </>
   );
 };
