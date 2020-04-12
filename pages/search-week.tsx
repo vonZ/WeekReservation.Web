@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { setConfiguration } from 'react-grid-system';
 import { withApollo } from '../lib/apollo';
-import { Provider } from '../context';
+import { SearchProvider } from '../context/searchContext';
 import Header from '../components/Header/Header';
 import SearchContainer from '../components/Search/SearchContainer';
 
@@ -13,9 +13,9 @@ const SearchWeekPage = () => {
   return (
     <>
       <Header />
-      <Provider>
+      <SearchProvider>
         <SearchContainer />
-      </Provider>
+      </SearchProvider>
     </>
   );
 };

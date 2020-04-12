@@ -1,20 +1,20 @@
-export const InitialState = {
+export const SearchInitialState = {
   fromDate: '',
-  endDate: '',
+  toDate: '',
   selectedSlot: {},
 };
 
-export type State = typeof InitialState;
+export type SearchState = typeof SearchInitialState;
 
-export type Action =
+export type SearchAction =
   | { type: 'fromDate' }
-  | { type: 'endDate' }
+  | { type: 'toDate' }
   | { type: 'selectedSlot' }
   | { type: 'setFromDate'; fromDate: string }
-  | { type: 'setEndDate'; endDate: string }
-  | { type: 'setSelectedSlot'; selectedSlot: Object };
+  | { type: 'setToDate'; toDate: string }
+  | { type: 'setSelectedSlot'; selectedSlot: any };
 
-export const SearchReducer = (state: State, action: Action) => {
+export const SearchReducer = (state: SearchState, action: SearchAction) => {
   switch (action.type) {
     case 'setFromDate':
       return {
@@ -22,10 +22,10 @@ export const SearchReducer = (state: State, action: Action) => {
         fromDate: action.fromDate,
       };
 
-    case 'setEndDate':
+    case 'setToDate':
       return {
         ...state,
-        endDate: action.endDate,
+        toDate: action.toDate,
       };
 
     case 'setSelectedSlot':

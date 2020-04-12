@@ -30,6 +30,7 @@ export const SelectedResultWrapper = styled.div<ISelectedResultWrapperProps>`
   background: white;
   padding: 30px;
   position: fixed;
+  border: 1px solid #00000012;
   box-shadow: 0px 2px 6px 1px #00000005;
   width: 100%;
   bottom: 0px;

@@ -7,3 +7,13 @@ export const scrollElementIntoView = (element: HTMLElement, behavior: any = 'smo
   smoothscroll.polyfill();
   element.scrollIntoView({ behavior });
 };
+
+export const convertArrayToObject = (array: any, key: any) => {
+  const initialValue = {};
+  return array.reduce((obj: any, item: any) => {
+    return {
+      ...obj,
+      [item[key]]: item.value,
+    };
+  }, initialValue);
+};

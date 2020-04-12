@@ -1,7 +1,7 @@
 import { FunctionComponent as FC, useState, useEffect } from 'react';
-import { useDispatch } from '../../../context';
+import { useDispatch } from '../../../context/searchContext';
 import { Card } from '../../Shared';
-import { TransitionTbodyWrapper, TransitionTrWrapper } from './common';
+// import { TransitionTbodyWrapper, TransitionTrWrapper } from './common';
 import * as $ from './style';
 import ResultTableItem from './ResultTableItem';
 import ShowMoreResults from './ShowMoreResults';
@@ -14,12 +14,17 @@ interface IResultTableProps {
 const ResultTable: FC<IResultTableProps> = ({ searchResults = [], nrOfItemsPerPage = 3 }) => {
   const [nodes, setNodes] = useState(searchResults.slice(0, nrOfItemsPerPage));
   const [resultIndex, setResultIndex] = useState(nrOfItemsPerPage);
+  const [selectedSlot, setSelectedSlot] = useState({});
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     setNodes(searchResults.slice(0, resultIndex));
   }, [resultIndex]);
+
+  useEffect(() => {
+    dispatch({ type: 'setSelectedSlot', selectedSlot });
+  }, [selectedSlot]);
 
   const showMoreResultsProps = {
     shouldRender: nodes.length < searchResults.length,
@@ -38,16 +43,17 @@ const ResultTable: FC<IResultTableProps> = ({ searchResults = [], nrOfItemsPerPa
               <$.StyledTh>Antal besökare</$.StyledTh>
             </tr>
           </thead>
-          <TransitionTbodyWrapper>
+          {/* <TransitionTbodyWrapper> */}
+          <tbody>
             {nodes.map((item: any, key: string) => (
-              <TransitionTrWrapper key={key}>
-                <ResultTableItem
-                  item={item}
-                  setSelectedSlot={(selectedSlot: any) => dispatch({ type: 'setSelectedSlot', selectedSlot })}
-                />
-              </TransitionTrWrapper>
+              // <TransitionTrWrapper key={key}>
+              <tr key={key}>
+                <ResultTableItem item={item} setSelectedSlot={setSelectedSlot} />
+              </tr>
+              // </TransitionTrWrapper>
             ))}
-          </TransitionTbodyWrapper>
+          </tbody>
+          {/* </TransitionTbodyWrapper> */}
         </table>
       </Card>
       <ShowMoreResults {...showMoreResultsProps} />

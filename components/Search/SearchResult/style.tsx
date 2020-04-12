@@ -72,7 +72,7 @@ export const StyledActionButton = styled.button`
 export const StyledRoomImage = styled.img<IStyledRoomImageProps>`
   height: 300px;
   width: 100%;
-  objectfit: cover;
+  object-fit: cover;
   display: inherit;
   opacity: ${props => (props.imageloaded ? '1' : '0')};
   transition: opacity 0.6s;

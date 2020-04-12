@@ -1,36 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { sv } from 'date-fns/locale';
+import parseISO from 'date-fns/parseISO'
 import { DateRangePicker } from 'react-nice-dates';
 import { Container, Row, Col } from 'react-grid-system';
-import { useDispatch } from '../../../context';
+import { useDispatch, useGlobalState } from '../../../context/searchContext';
 import { UI, variables } from '../../../utils';
 import { Button } from '../../Shared';
 import * as $ from './style';
 
 const DateSearch = ({ searchSlot }) => {
   const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [toDate, setToDate] = useState();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (startDate && endDate) {
+    if (startDate && toDate) {
       const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
       const startDateISOTime = new Date(startDate - tzoffset).toISOString().slice(0, -1);
-      const endDateDateISOTime = new Date(endDate - tzoffset).toISOString().slice(0, -1);
+      const endDateDateISOTime = new Date(toDate - tzoffset).toISOString().slice(0, -1);
 
+      //TODO: change to setToDate
       dispatch({ type: 'setFromDate', fromDate: startDateISOTime });
-      dispatch({ type: 'setEndDate', endDate: endDateDateISOTime });
+      dispatch({ type: 'setToDate', toDate: endDateDateISOTime });
 
       searchSlot({ variables: { fromDate: startDateISOTime, toDate: endDateDateISOTime } });
     }
-  }, [startDate, endDate]);
+  }, [startDate, toDate]);
 
   const dateRangePickerProps = {
     startDate,
-    endDate,
+    endDate: toDate,
     onStartDateChange: setStartDate,
-    onEndDateChange: setEndDate,
+    onEndDateChange: setToDate,
     minimumDate: new Date(),
     format: 'dd MMMM yyyy',
     locale: sv,
