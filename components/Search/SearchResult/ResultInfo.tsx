@@ -15,7 +15,7 @@ const ResultList: FC = () => {
   return (
     <Card padding="0px">
       <Row nogutter>
-        <Col>
+        <Col sm={12} md={6}>
           <StyledRoomImage src={roomImageBaseData} imageloaded={imageLoaded} onLoad={() => setImageLoaded(true)} />
         </Col>
         <Col>
