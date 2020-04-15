@@ -6,6 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient, NormalizedCacheObject } from 'apollo-boost';
 import withApollo from '../hooks/withApollo';
 import { GlobalStyle } from '../static/globalStyle';
+import { GlobalProvider } from '../context/globalContext';
 import '../static/global.scss';
 import '../static/react-nice-dates.scss';
 
@@ -31,7 +32,7 @@ class MyApp extends App<IProps> {
     const { Component, pageProps, apollo } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         <Head>
           <title>Sök vecka</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,10 +44,12 @@ class MyApp extends App<IProps> {
         <ApolloProvider client={apollo}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
-            <Component {...pageProps} />
+            <GlobalProvider>
+              <Component {...pageProps} />
+            </GlobalProvider>
           </ThemeProvider>
         </ApolloProvider>
-      </React.Fragment>
+      </>
     );
   }
 }
