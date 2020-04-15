@@ -37,6 +37,7 @@ const SearchContainer: FC = () => {
       <$.SelectedResultWrapper istriggered={!!Object.keys(selectedSlot).length}>
         <Container>
           <h2>{selectedSlot.alias}</h2>
+          <p>{selectedSlot.capacity}</p>
         </Container>
       </$.SelectedResultWrapper>
     </>

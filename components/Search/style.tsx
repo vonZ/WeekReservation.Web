@@ -34,6 +34,6 @@ export const SelectedResultWrapper = styled.div<ISelectedResultWrapperProps>`
   box-shadow: 0px 2px 6px 1px #00000005;
   width: 100%;
   bottom: 0px;
-  top: ${props => (props.istriggered ? '90%' : '100%')};
+  top: ${props => (props.istriggered ? '85%' : '100%')};
   transition: all 0.2s ease-out;
 `;
